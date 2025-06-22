@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Empresa de Software - MVP</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🖥️ Simulador de Empresa de Software</h1>
+            <p>Crea tu personaje y observa cómo toma decisiones autónomas mientras trabaja en proyectos</p>
+        </div>
+
+        <!-- Character Setup Panel -->
+        <div id="character-setup" class="panel character-setup">
+            <h2>📝 Creación del Personaje</h2>
+            <div class="setup-form">
+                <div>
+                    <div class="form-group">
+                        <label for="character-name">Nombre del Personaje:</label>
+                        <input type="text" id="character-name" value="Alex Developer" placeholder="Ingresa el nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="work-start">Hora de Inicio (24h):</label>
+                        <input type="time" id="work-start" value="09:00">
+                    </div>
+                    <div class="form-group">
+                        <label for="work-end">Hora de Fin (24h):</label>
+                        <input type="time" id="work-end" value="18:00">
+                    </div>
+                </div>
+                <div>
+                    <div class="form-group">
+                        <label for="programming-skill">Habilidad de Programación (1-10):</label>
+                        <input type="range" id="programming-skill" min="1" max="10" value="5">
+                        <span id="programming-display">5</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="concentration-skill">Concentración (1-10):</label>
+                        <input type="range" id="concentration-skill" min="1" max="10" value="5">
+                        <span id="concentration-display">5</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="speed-skill">Velocidad de Desarrollo (1-10):</label>
+                        <input type="range" id="speed-skill" min="1" max="10" value="5">
+                        <span id="speed-display">5</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="traits-selection">
+                <label>Selecciona Rasgos de Personalidad (máximo 2):</label>
+                <div class="traits-grid">
+                    <div class="trait-option">
+                        <input type="checkbox" id="workaholic" value="workaholic">
+                        <label for="workaholic">Workaholic (+energía, -descansos)</label>
+                    </div>
+                    <div class="trait-option">
+                        <input type="checkbox" id="perfectionist" value="perfectionist">
+                        <label for="perfectionist">Perfeccionista (+calidad, -velocidad)</label>
+                    </div>
+                    <div class="trait-option">
+                        <input type="checkbox" id="morning-person" value="morning-person">
+                        <label for="morning-person">Madrugador (+productividad AM)</label>
+                    </div>
+                    <div class="trait-option">
+                        <input type="checkbox" id="night-owl" value="night-owl">
+                        <label for="night-owl">Noctámbulo (+productividad PM)</label>
+                    </div>
+                    <div class="trait-option">
+                        <input type="checkbox" id="methodical" value="methodical">
+                        <label for="methodical">Metódico (+concentración, -creatividad)</label>
+                    </div>
+                    <div class="trait-option">
+                        <input type="checkbox" id="creative" value="creative">
+                        <label for="creative">Creativo (+innovación, -concentración)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="btn" id="start-btn">🚀 Comenzar Simulación</button>
+            </div>
+        </div>
+
+        <!-- Game Area -->
+        <div id="game-area" class="game-area hidden">
+            <!-- Character Status Panel -->
+            <div class="panel">
+                <h2>👤 Estado del Personaje</h2>
+                <div class="time-display">
+                    <div id="current-time">09:00 - Lunes</div>
+                </div>
+                
+                <div class="needs-bar">
+                    <span class="needs-label">Energía:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill energy" id="energy-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="energy-value">100</span>
+                </div>
+
+                <div class="needs-bar">
+                    <span class="needs-label">Hambre:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill hunger" id="hunger-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="hunger-value">100</span>
+                </div>
+
+                <div class="needs-bar">
+                    <span class="needs-label">Sed:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill thirst" id="thirst-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="thirst-value">100</span>
+                </div>
+
+                <div class="needs-bar">
+                    <span class="needs-label">Baño:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill bathroom" id="bathroom-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="bathroom-value">100</span>
+                </div>
+
+                <div class="needs-bar">
+                    <span class="needs-label">Concentración:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill concentration" id="concentration-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="concentration-value">100</span>
+                </div>
+
+                <div class="needs-bar">
+                    <span class="needs-label">Motivación:</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill motivation" id="motivation-bar" style="width: 100%"></div>
+                    </div>
+                    <span id="motivation-value">100</span>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-secondary" id="pause-btn">⏸️ Pausar</button>
+                    <button class="btn" id="reset-btn">🔄 Reiniciar</button>
+                </div>
+            </div>
+
+            <!-- Work Area Panel -->
+            <div class="panel">
+                <h2>💻 Área de Trabajo</h2>
+                
+                <div class="contract-info">
+                    <h3>📋 Contrato Actual: Sistema de Gestión Web</h3>
+                    <p><strong>Cliente:</strong> Empresa TechStart</p>
+                    <p><strong>Precio:</strong> €2,500</p>
+                    <p><strong>Deadline:</strong> 5 días</p>
+                </div>
+
+                <div class="current-task" id="current-task">
+                    <h4>🎯 Tarea Actual: <span id="task-name">Esperando inicio...</span></h4>
+                    <p id="task-description">El personaje decidirá qué hacer basándose en sus necesidades.</p>
+                    <div class="task-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill energy" id="task-progress-bar" style="width: 0%"></div>
+                        </div>
+                        <span id="task-progress-text">0% completado</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4>📊 Progreso del Proyecto:</h4>
+                    <div class="progress-bar">
+                        <div class="progress-fill motivation" id="project-progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span id="project-progress-text">0% completado</span>
+                </div>
+            </div>
+
+            <!-- Activity Log Panel -->
+            <div class="panel" style="grid-column: 1 / -1;">
+                <h2>📝 Registro de Actividades</h2>
+                <div class="activity-log" id="activity-log">
+                    <div class="log-entry">Sistema iniciado. Esperando que comience la simulación...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/Character.js"></script>
+    <script src="js/GameState.js"></script>
+    <script src="js/UI.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

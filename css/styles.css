@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a2e;
+    color: #eee;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.header h1 {
+    color: #4CAF50;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.game-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.panel {
+    background: #16213e;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.panel h2 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.character-setup {
+    grid-column: 1 / -1;
+}
+
+.needs-bar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.needs-label {
+    width: 120px;
+    font-weight: bold;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 20px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 10px;
+}
+
+.energy { background: linear-gradient(90deg, #FF6B6B, #4ECDC4); }
+.hunger { background: linear-gradient(90deg, #FFE66D, #FF6B6B); }
+.thirst { background: linear-gradient(90deg, #4ECDC4, #45B7D1); }
+.bathroom { background: linear-gradient(90deg, #96CEB4, #FECA57); }
+.concentration { background: linear-gradient(90deg, #A8E6CF, #88D8C0); }
+.motivation { background: linear-gradient(90deg, #FFD93D, #6BCF7F); }
+
+.activity-log {
+    max-height: 200px;
+    overflow-y: auto;
+    background: #0f1419;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.log-entry {
+    margin-bottom: 5px;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+.log-work { background: rgba(76, 175, 80, 0.2); }
+.log-need { background: rgba(255, 152, 0, 0.2); }
+.log-task { background: rgba(33, 150, 243, 0.2); }
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #45a049;
+}
+
+.btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #2196F3;
+}
+
+.btn-secondary:hover {
+    background: #1976D2;
+}
+
+.setup-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 6px;
+    background: #2a2a3e;
+    color: #eee;
+}
+
+.traits-selection {
+    grid-column: 1 / -1;
+}
+
+.traits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.trait-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: #2a2a3e;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.trait-option:hover {
+    background: #3a3a4e;
+}
+
+.trait-option input[type="checkbox"] {
+    width: auto;
+}
+
+.time-display {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.current-task {
+    background: #2a2a3e;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.task-progress {
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
+}
+
+.contract-info {
+    background: #2a2a3e;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.contract-info h3 {
+    color: #4CAF50;
+    margin-bottom: 10px;
+}
