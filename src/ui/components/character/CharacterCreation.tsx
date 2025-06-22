@@ -1,12 +1,21 @@
 // src/ui/components/character/CharacterCreation.tsx
 
 import { Character } from '@core/character/Character';
-import { Trait } from '@core/character/Trait';
 import { CharacterService } from '@services/CharacterService';
 import { AlertCircle, CheckCircle, Clock, RotateCcw, Star, User } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { CharacterCreationForm, SKILL_CATEGORIES_MAP, SkillCategory } from '../../../types/character';
+import { Trait } from '../../../core/character/Trait';
+import { CharacterCreationForm, ITrait, SKILL_CATEGORIES_MAP, SkillCategory } from '../../../types/character';
+// src/ui/components/character/CharacterCreation.tsx
+// src/ui/components/character/CharacterCreation.tsx
 
+/*import React, { useState, useEffect } from 'react';
+import { User, Zap, Clock, Star, AlertCircle, CheckCircle, RotateCcw } from 'lucide-react';
+import { CharacterCreationForm, SKILL_CATEGORIES_MAP, SkillCategory, ITrait } from '@types/character';
+import { CharacterService } from '@services/CharacterService';
+import { Character } from '@core/character/Character';
+import { Trait } from '@core/character/Trait';
+*/
 interface CharacterCreationProps {
   onCharacterCreated: (character: Character) => void;
   onCancel?: () => void;
@@ -72,10 +81,25 @@ export const CharacterCreation: React.FC<CharacterCreationProps> = ({
       if (isSelected) {
         newTraits = prev.selectedTraits.filter(t => t.id !== trait.id);
       } else if (prev.selectedTraits.length < 2) {
-        newTraits = [...prev.selectedTraits, trait];
+        // Convertir Trait (clase) a ITrait (interfaz) para el formulario
+        const traitData: ITrait = {
+          id: trait.id,
+          name: trait.name,
+          description: trait.description,
+          effects: trait.effects,
+          behaviorType: trait.behaviorType
+        };
+        newTraits = [...prev.selectedTraits, traitData];
       } else {
         // Reemplazar el primer rasgo si ya hay 2
-        newTraits = [prev.selectedTraits[1], trait];
+        const traitData: ITrait = {
+          id: trait.id,
+          name: trait.name,
+          description: trait.description,
+          effects: trait.effects,
+          behaviorType: trait.behaviorType
+        };
+        newTraits = [prev.selectedTraits[1], traitData];
       }
       
       return { ...prev, selectedTraits: newTraits };
@@ -134,7 +158,12 @@ export const CharacterCreation: React.FC<CharacterCreationProps> = ({
     
     const otherTrait = form.selectedTraits[0];
     if (form.selectedTraits.length === 1) {
-      const validation = characterService.validateTraitCompatibility([otherTrait, trait]);
+      // Convertir ITrait a Trait para la validación
+      const traitInstances = [
+        new Trait(otherTrait.id, otherTrait.name, otherTrait.description, otherTrait.effects, otherTrait.behaviorType),
+        trait
+      ];
+      const validation = characterService.validateTraitCompatibility(traitInstances);
       return validation.isValid ? 'compatible' : 'incompatible';
     }
     
